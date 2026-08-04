@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="794" height="1123" viewBox="0 0 794 1123">
+  <defs>
+    <linearGradient id="mast" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b3c5d"/>
+      <stop offset="1" stop-color="#1a517d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="794" height="1123" fill="#ffffff"/>
+
+  <!-- brand band -->
+  <rect width="794" height="150" fill="url(#mast)"/>
+  <text x="397.0" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="44" font-weight="bold" fill="#ffffff">CRB<tspan fill="#e8641b">Techs</tspan></text>
+  <text x="397.0" y="112" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="20" fill="#c9d7e4">Authorised partner of James Heal</text>
+
+  <!-- headline -->
+  <text x="397.0" y="245" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="46" font-weight="bold" fill="#0b3c5d">Scan to view &amp; download</text>
+  <text x="397.0" y="292" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="30" fill="#4c5a69">our product catalogues</text>
+
+  <!-- QR frame -->
+  <rect x="91.0" y="330" width="612" height="612" rx="28"
+        fill="#ffffff" stroke="#e8641b" stroke-width="6"/>
+  <image x="117.0" y="356" width="560" height="560"
+         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAxgAAAMYAQAAAABgBnzJAAACcklEQVR42u3dQU7EMAwFUIv73xmWjJJvp4BGQsrrAg2dTt8im6/Ecerz/VcxGAwGg8FgMBgMBoPBYDAYfzMqXd8Ppc/LY8MbPur9F4PBYDAYDMZ/MWpPUDFH7d8uN4c3GA8Gg8FgMBjX5qvXm3Fi6jVZDf8ubzAeDAaDwWAw5KslX+2rgd26oXzFYDAYDAZDvjqmo2H5b5m5kq8YDAaDwWAwjvVXT8JYzGPyFYPBYDAYDPkqfvWjv/YPMhgMBoPBYOyTTrmJQypxf/4G48FgMBgMBuPm9cG4KzCuG8ZfyVcMBoPBYDDkq72f1X5zzlFzVJOvGAwGg8FgyFfHLg3dBFe3bmg8GAwGg8FgXN6fIbZwj3Ncw/PyFYPBYDAYDPlqD0vdjFZsNDpEL+PBYDAYDAbj8nx1DFrxg/2DDAaDwWAwGNWs7nVVWPNPYvcG+YrBYDAYDIb+V92RgvOJhNW0JJWvGAwGg8FgqG+fa9err34fcprxYDAYDAaDce38VY0lVXWq0YrTXPIVg8FgMBgM/durOQrnyUxXpRYNxoPBYDAYDIbzB4/l60O3K/mKwWAwGAyGfNW1Ye+y1rFt+/Kw8WAwGAwGg2H+KmanuZd7t7VQvmIwGAwGg3F5f9GHrRuGWiz7BxkMBoPBYMhXc3aqVHZVTaur+HLjwWAwGAwG4/LznetUvj7Pfe3zXcaDwWAwGAyGfHXshRW7jHZBy3gwGAwGg8GQr7rjCLtkNTcaNR4MBoPBYDDUX8X1wUoVWfNGQvmKwWAwGAyG/YNz//bqC7Rig3f5isFgMBgMhv5X77gYDAaDwWAwGAwGg8FgMBiM315fUo1rLWRfWCoAAAAASUVORK5CYII="/>
+
+  <!-- short link -->
+  <rect x="162.0" y="985" width="470" height="58" rx="29" fill="#0b3c5d"/>
+  <text x="397.0" y="1024" text-anchor="middle" font-family="Courier New, monospace"
+        font-size="26" font-weight="bold" fill="#ffffff">hdbear.github.io/Chaminda</text>
+
+  <!-- footer -->
+  <text x="397.0" y="1082" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="17" fill="#4c5a69">James Heal textile testing instruments — brochures &amp; flyers</text>
+</svg>
