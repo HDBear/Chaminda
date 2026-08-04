@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Generate the QR code and print-ready A4 poster for the catalogue page.
+"""Generate branded QR assets for the catalogue page (CRB Techs x James Heal template).
 
-Usage: python3 tools/make_qr.py <SITE_URL> [short-label]
-Example: python3 tools/make_qr.py https://hdbear.github.io/Chaminda/
-Outputs into qr/: qr.svg, qr.png, poster-a4.svg, poster-a4.pdf, poster-a4.png
+Usage: python3 tools/make_qr.py [SITE_URL] [short-label]
+Outputs into qr/: qr.svg, qr.png, poster-a4.svg/png/pdf, handout-a6.svg/png/pdf
+
+Logos: assets/logo-jamesheal.png is embedded. If assets/crbtechs-logo.png exists
+it is used; otherwise an SVG stand-in of the CRB Techs mark is drawn.
 """
 import base64
 import subprocess
@@ -19,77 +21,176 @@ QR_DIR.mkdir(exist_ok=True)
 URL = sys.argv[1].rstrip("/") + "/" if len(sys.argv) > 1 else "https://hdbear.github.io/Chaminda/"
 SHORT = sys.argv[2] if len(sys.argv) > 2 else URL.replace("https://", "").rstrip("/")
 
-# --- standalone QR assets -------------------------------------------------
+NAVY = "#1d2b49"
+HEAD_NAVY = "#29385e"
+RED = "#e8442b"
+CREAM = "#f4ede1"
+GRAY = "#4c5158"
+BG = "#ffffff"
+
+
+def b64(path: Path) -> str:
+    return base64.b64encode(path.read_bytes()).decode()
+
+# --- standalone QR --------------------------------------------------------
 qr = segno.make(URL, error="m")
 qr.save(QR_DIR / "qr.svg", kind="svg", scale=8, border=4)
 qr.save(QR_DIR / "qr.png", kind="png", scale=16, border=4, dpi=300)
 print(f"  qr.svg + qr.png for {URL}")
 
-# QR as embedded base64 PNG for the poster
 
-def b64_png(scale):
+def qr_png_b64(border=1) -> str:
     from io import BytesIO
     buf = BytesIO()
-    qr.save(buf, kind="png", scale=scale, border=2)
+    qr.save(buf, kind="png", scale=24, border=border)
     return base64.b64encode(buf.getvalue()).decode()
 
-qr_b64 = b64_png(24)
 
-# --- A4 poster (210 x 297 mm), viewBox in px at 96 dpi --------------------
+QR_B64 = qr_png_b64()
+JH_LOGO = (SITE / "assets" / "logo-jamesheal.png").read_bytes()
+JH_B64 = base64.b64encode(JH_LOGO).decode()
+
+
+def crb_logo(x, y, scale=1.0) -> str:
+    """CRB Techs stand-in mark, or embedded real logo if provided."""
+    custom = SITE / "assets" / "crbtechs-logo.png"
+    if custom.exists():
+        return (f'<image x="{x}" y="{y}" height="{104*scale}" '
+                f'xlink:href="data:image/png;base64,{b64(custom)}"/>')
+    s = scale
+    return f"""<g transform="translate({x},{y}) scale({s})">
+  <rect x="0" y="0" width="26" height="26" fill="{RED}"/>
+  <rect x="30" y="0" width="26" height="26" fill="{NAVY}"/>
+  <rect x="0" y="30" width="26" height="26" fill="{RED}"/>
+  <rect x="30" y="30" width="26" height="26" fill="{RED}"/>
+  <text x="68" y="46" font-family="Arial, Helvetica, sans-serif" font-size="52"
+        font-weight="bold" fill="{RED}" letter-spacing="1">CRB</text>
+  <text x="68" y="72" font-family="Arial, Helvetica, sans-serif" font-size="15.5"
+        font-weight="bold" fill="{NAVY}" letter-spacing="2.6">TECHS (PVT) LTD</text>
+  <text x="4" y="98" font-family="Georgia, serif" font-size="15" font-style="italic"
+        fill="#222">Trusted partner in your progress</text>
+</g>"""
+
+
+ICONS = {
+    "scan": '<rect x="7.5" y="2.5" width="9" height="19" rx="2"/>'
+            '<path d="M10 7h1.8v1.8H10zM12.2 7H14v1.8h-1.8zM10 8.8h1.8v1.8H10zM12.2 8.8H14v1.8h-1.8z" fill="currentColor" stroke="none"/>'
+            '<path d="M9.8 12.5h4.4M9.8 15.5h4.4"/>',
+    "download": '<path d="M12 4v8.5m0 0l-3.2-3.2M12 12.5l3.2-3.2"/>'
+                '<path d="M5.5 15.5h4.5l1 1.8h2.8l1-1.8h3.7v4H5.5z"/>',
+    "thanks": '<circle cx="12" cy="9" r="4.2"/>'
+              '<path d="M10 12.5L8.5 20l3.5-2.2L15.5 20 14 12.5"/>'
+              '<path d="M10.6 9l1.1 1.1 2-2.1"/>',
+}
+
+
+def icon_strip(y) -> str:
+    cols = [(166, "SCAN THE CODE", "scan"), (397, "BROWSE &amp; DOWNLOAD", "download"), (628, "THANK YOU!", "thanks")]
+    out = []
+    for cx, label, icon in cols:
+        out.append(f'<circle cx="{cx}" cy="{y}" r="29" fill="{NAVY}"/>')
+        out.append(f'<g transform="translate({cx-14},{y-14}) scale(1.167)" fill="none" stroke="#ffffff" '
+                   f'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" color="#ffffff">{ICONS[icon]}</g>')
+        out.append(f'<text x="{cx}" y="{y+52}" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" '
+                   f'font-size="12.5" font-weight="bold" fill="{NAVY}" letter-spacing="0.8">{label}</text>')
+    return "\n  ".join(out)
+
+
+# --- A4 poster --------------------------------------------------------------
 W, H = 794, 1123
 poster = f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      width="{W}" height="{H}" viewBox="0 0 {W} {H}">
   <defs>
-    <linearGradient id="mast" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b3c5d"/>
-      <stop offset="1" stop-color="#1a517d"/>
-    </linearGradient>
+    <pattern id="geo" width="46" height="46" patternUnits="userSpaceOnUse">
+      <rect width="46" height="46" fill="{BG}"/>
+      <path d="M0 46L46 0M-11 11L11 -11M35 57L57 35" stroke="#eef0f3" stroke-width="1.4" fill="none"/>
+    </pattern>
   </defs>
 
-  <rect width="{W}" height="{H}" fill="#ffffff"/>
+  <rect width="{W}" height="{H}" fill="url(#geo)"/>
 
-  <!-- brand band -->
-  <rect width="{W}" height="150" fill="url(#mast)"/>
-  <text x="{W/2}" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="44" font-weight="bold" fill="#ffffff">CRB<tspan fill="#e8641b">Techs</tspan></text>
-  <text x="{W/2}" y="112" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="20" fill="#c9d7e4">Authorised partner of James Heal</text>
+  <!-- edge accents -->
+  <polygon points="0,540 44,584 44,648 0,604" fill="{NAVY}"/>
+  <polygon points="0,618 26,644 26,690 0,664" fill="{RED}"/>
+  <polygon points="{W},540 {W-44},584 {W-44},648 {W},604" fill="{NAVY}"/>
+  <polygon points="{W},618 {W-26},644 {W-26},690 {W},664" fill="{RED}"/>
+
+  <!-- header: logos -->
+  <image x="52" y="52" width="301" height="52" xlink:href="data:image/png;base64,{JH_B64}"/>
+  <line x1="397" y1="46" x2="397" y2="108" stroke="#d4d7dc" stroke-width="1.5"/>
+  {crb_logo(428, 40, 0.96)}
 
   <!-- headline -->
-  <text x="{W/2}" y="245" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="46" font-weight="bold" fill="#0b3c5d">Scan to view &amp; download</text>
-  <text x="{W/2}" y="292" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="30" fill="#4c5a69">our product catalogues</text>
+  <text x="{W/2}" y="252" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="42" font-weight="bold" fill="{HEAD_NAVY}">CRB Techs (Pvt) Ltd.</text>
+  <text x="{W/2}" y="298" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="33" font-weight="bold" fill="{RED}">Product Catalogue Library</text>
+  <line x1="200" y1="326" x2="594" y2="326" stroke="#c7cbd1" stroke-width="1.2"/>
+  <line x1="372" y1="326" x2="422" y2="326" stroke="{RED}" stroke-width="4"/>
 
   <!-- QR frame -->
-  <rect x="{(W-560)/2 - 26}" y="330" width="612" height="612" rx="28"
-        fill="#ffffff" stroke="#e8641b" stroke-width="6"/>
-  <image x="{(W-560)/2}" y="356" width="560" height="560"
-         xlink:href="data:image/png;base64,{qr_b64}"/>
+  <rect x="170" y="356" width="470" height="470" rx="26" fill="#e3e6ea"/>
+  <rect x="162" y="348" width="470" height="470" rx="26" fill="#ffffff" stroke="{NAVY}" stroke-width="10"/>
+  <image x="206" y="392" width="382" height="382" xlink:href="data:image/png;base64,{QR_B64}"/>
 
   <!-- short link -->
-  <rect x="{(W-470)/2}" y="985" width="470" height="58" rx="29" fill="#0b3c5d"/>
-  <text x="{W/2}" y="1024" text-anchor="middle" font-family="Courier New, monospace"
-        font-size="26" font-weight="bold" fill="#ffffff">{SHORT}</text>
+  <text x="{W/2}" y="858" text-anchor="middle" font-family="Courier New, monospace"
+        font-size="20" font-weight="bold" fill="{NAVY}">{SHORT}</text>
 
-  <!-- footer -->
-  <text x="{W/2}" y="1082" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="17" fill="#4c5a69">James Heal textile testing instruments — brochures &amp; flyers</text>
+  <!-- icon strip -->
+  <line x1="281" y1="894" x2="281" y2="972" stroke="#d4d7dc" stroke-width="1"/>
+  <line x1="513" y1="894" x2="513" y2="972" stroke="#d4d7dc" stroke-width="1"/>
+  {icon_strip(922)}
+
+  <!-- footer band -->
+  <rect x="0" y="1036" width="{W}" height="87" fill="{NAVY}"/>
+  <text x="{W/2}" y="1068" text-anchor="middle" font-family="Georgia, serif"
+        font-size="17" font-style="italic" fill="{CREAM}">We value your time and interest.</text>
+  <text x="{W/2}" y="1102" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="24" font-weight="bold" fill="{RED}" letter-spacing="1">THANK YOU FOR VISITING!</text>
+
+  <!-- outer border (drawn last, overlays band edges) -->
+  <rect x="11" y="11" width="{W-22}" height="{H-22}" rx="22" fill="none" stroke="{RED}" stroke-width="2.5"/>
 </svg>
 """
 (QR_DIR / "poster-a4.svg").write_text(poster, encoding="utf-8")
-print("  poster-a4.svg written")
+print("  poster-a4.svg written (CRB x James Heal template)")
 
-# --- raster + pdf versions ------------------------------------------------
-try:
-    subprocess.run(["magick", "-density", "300", str(QR_DIR / "poster-a4.svg"),
-                    "-background", "white", "-alpha", "remove",
-                    str(QR_DIR / "poster-a4.png")], check=True,
-                   stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    subprocess.run(["magick", "-density", "300", str(QR_DIR / "poster-a4.svg"),
-                    "-background", "white", "-alpha", "remove",
-                    str(QR_DIR / "poster-a4.pdf")], check=True,
-                   stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    print("  poster-a4.png + poster-a4.pdf written (300 dpi)")
-except (subprocess.CalledProcessError, FileNotFoundError) as e:
-    print(f"  !! magick conversion failed: {e} — print poster-a4.svg from a browser instead")
+# --- A6 handout (landscape 148x105mm) --------------------------------------
+HW, HH = 559, 397
+handout = f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="{HW}" height="{HH}" viewBox="0 0 {HW} {HH}">
+  <rect width="{HW}" height="{HH}" fill="{BG}"/>
+  <image x="34" y="34" width="188" height="33" xlink:href="data:image/png;base64,{JH_B64}"/>
+  {crb_logo(36, 92, 0.62)}
+  <text x="34" y="212" font-family="Arial, Helvetica, sans-serif" font-size="19"
+        font-weight="bold" fill="{HEAD_NAVY}">Product Catalogue Library</text>
+  <text x="34" y="238" font-family="Arial, Helvetica, sans-serif" font-size="12.5"
+        fill="{GRAY}">Scan to browse &amp; download</text>
+  <text x="34" y="256" font-family="Arial, Helvetica, sans-serif" font-size="12.5"
+        fill="{GRAY}">25 brochures &amp; flyers</text>
+  <text x="34" y="330" font-family="Courier New, monospace" font-size="14"
+        font-weight="bold" fill="{NAVY}">{SHORT}</text>
+  <rect x="334" y="52" width="196" height="196" rx="18" fill="#ffffff" stroke="{NAVY}" stroke-width="7"/>
+  <image x="350" y="68" width="164" height="164" xlink:href="data:image/png;base64,{QR_B64}"/>
+  <rect x="0" y="356" width="{HW}" height="41" fill="{NAVY}"/>
+  <text x="{HW/2}" y="381" text-anchor="middle" font-family="Georgia, serif"
+        font-size="13" font-style="italic" fill="{CREAM}">Thank you for visiting CRB Techs!</text>
+  <rect x="8" y="8" width="{HW-16}" height="{HH-16}" rx="14" fill="none" stroke="{RED}" stroke-width="1.8"/>
+</svg>
+"""
+(QR_DIR / "handout-a6.svg").write_text(handout, encoding="utf-8")
+print("  handout-a6.svg written")
+
+# --- raster + pdf -----------------------------------------------------------
+for name, density in (("poster-a4", 300), ("handout-a6", 300)):
+    svg = QR_DIR / f"{name}.svg"
+    for ext, extra in (("png", []), ("pdf", [])):
+        try:
+            subprocess.run(["magick", "-density", str(density), str(svg),
+                            "-background", "white", "-alpha", "remove", *extra,
+                            str(QR_DIR / f"{name}.{ext}")],
+                           check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            print(f"  {name}.{ext} written")
+        except (subprocess.CalledProcessError, FileNotFoundError) as e:
+            print(f"  !! {name}.{ext} failed: {e}")

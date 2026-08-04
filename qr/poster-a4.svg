@@ -1,39 +1,73 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      width="794" height="1123" viewBox="0 0 794 1123">
   <defs>
-    <linearGradient id="mast" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0b3c5d"/>
-      <stop offset="1" stop-color="#1a517d"/>
-    </linearGradient>
+    <pattern id="geo" width="46" height="46" patternUnits="userSpaceOnUse">
+      <rect width="46" height="46" fill="#ffffff"/>
+      <path d="M0 46L46 0M-11 11L11 -11M35 57L57 35" stroke="#eef0f3" stroke-width="1.4" fill="none"/>
+    </pattern>
   </defs>
 
-  <rect width="794" height="1123" fill="#ffffff"/>
+  <rect width="794" height="1123" fill="url(#geo)"/>
 
-  <!-- brand band -->
-  <rect width="794" height="150" fill="url(#mast)"/>
-  <text x="397.0" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="44" font-weight="bold" fill="#ffffff">CRB<tspan fill="#e8641b">Techs</tspan></text>
-  <text x="397.0" y="112" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="20" fill="#c9d7e4">Authorised partner of James Heal</text>
+  <!-- edge accents -->
+  <polygon points="0,540 44,584 44,648 0,604" fill="#1d2b49"/>
+  <polygon points="0,618 26,644 26,690 0,664" fill="#e8442b"/>
+  <polygon points="794,540 750,584 750,648 794,604" fill="#1d2b49"/>
+  <polygon points="794,618 768,644 768,690 794,664" fill="#e8442b"/>
+
+  <!-- header: logos -->
+  <image x="52" y="52" width="301" height="52" xlink:href="data:image/png;base64,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"/>
+  <line x1="397" y1="46" x2="397" y2="108" stroke="#d4d7dc" stroke-width="1.5"/>
+  <g transform="translate(428,40) scale(0.96)">
+  <rect x="0" y="0" width="26" height="26" fill="#e8442b"/>
+  <rect x="30" y="0" width="26" height="26" fill="#1d2b49"/>
+  <rect x="0" y="30" width="26" height="26" fill="#e8442b"/>
+  <rect x="30" y="30" width="26" height="26" fill="#e8442b"/>
+  <text x="68" y="46" font-family="Arial, Helvetica, sans-serif" font-size="52"
+        font-weight="bold" fill="#e8442b" letter-spacing="1">CRB</text>
+  <text x="68" y="72" font-family="Arial, Helvetica, sans-serif" font-size="15.5"
+        font-weight="bold" fill="#1d2b49" letter-spacing="2.6">TECHS (PVT) LTD</text>
+  <text x="4" y="98" font-family="Georgia, serif" font-size="15" font-style="italic"
+        fill="#222">Trusted partner in your progress</text>
+</g>
 
   <!-- headline -->
-  <text x="397.0" y="245" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="46" font-weight="bold" fill="#0b3c5d">Scan to view &amp; download</text>
-  <text x="397.0" y="292" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="30" fill="#4c5a69">our product catalogues</text>
+  <text x="397.0" y="252" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="42" font-weight="bold" fill="#29385e">CRB Techs (Pvt) Ltd.</text>
+  <text x="397.0" y="298" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="33" font-weight="bold" fill="#e8442b">Product Catalogue Library</text>
+  <line x1="200" y1="326" x2="594" y2="326" stroke="#c7cbd1" stroke-width="1.2"/>
+  <line x1="372" y1="326" x2="422" y2="326" stroke="#e8442b" stroke-width="4"/>
 
   <!-- QR frame -->
-  <rect x="91.0" y="330" width="612" height="612" rx="28"
-        fill="#ffffff" stroke="#e8641b" stroke-width="6"/>
-  <image x="117.0" y="356" width="560" height="560"
-         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAxgAAAMYAQAAAABgBnzJAAACcklEQVR42u3dQU7EMAwFUIv73xmWjJJvp4BGQsrrAg2dTt8im6/Ecerz/VcxGAwGg8FgMBgMBoPBYDAYfzMqXd8Ppc/LY8MbPur9F4PBYDAYDMZ/MWpPUDFH7d8uN4c3GA8Gg8FgMBjX5qvXm3Fi6jVZDf8ubzAeDAaDwWAw5KslX+2rgd26oXzFYDAYDAZDvjqmo2H5b5m5kq8YDAaDwWAwjvVXT8JYzGPyFYPBYDAYDPkqfvWjv/YPMhgMBoPBYOyTTrmJQypxf/4G48FgMBgMBuPm9cG4KzCuG8ZfyVcMBoPBYDDkq72f1X5zzlFzVJOvGAwGg8FgyFfHLg3dBFe3bmg8GAwGg8FgXN6fIbZwj3Ncw/PyFYPBYDAYDPlqD0vdjFZsNDpEL+PBYDAYDAbj8nx1DFrxg/2DDAaDwWAwGNWs7nVVWPNPYvcG+YrBYDAYDIb+V92RgvOJhNW0JJWvGAwGg8FgqG+fa9err34fcprxYDAYDAaDce38VY0lVXWq0YrTXPIVg8FgMBgM/durOQrnyUxXpRYNxoPBYDAYDIbzB4/l60O3K/mKwWAwGAyGfNW1Ye+y1rFt+/Kw8WAwGAwGg2H+KmanuZd7t7VQvmIwGAwGg3F5f9GHrRuGWiz7BxkMBoPBYMhXc3aqVHZVTaur+HLjwWAwGAwG4/LznetUvj7Pfe3zXcaDwWAwGAyGfHXshRW7jHZBy3gwGAwGg8GQr7rjCLtkNTcaNR4MBoPBYDDUX8X1wUoVWfNGQvmKwWAwGAyG/YNz//bqC7Rig3f5isFgMBgMhv5X77gYDAaDwWAwGAwGg8FgMBiM315fUo1rLWRfWCoAAAAASUVORK5CYII="/>
+  <rect x="170" y="356" width="470" height="470" rx="26" fill="#e3e6ea"/>
+  <rect x="162" y="348" width="470" height="470" rx="26" fill="#ffffff" stroke="#1d2b49" stroke-width="10"/>
+  <image x="206" y="392" width="382" height="382" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAugAAALoAQAAAAACIT09AAACXUlEQVR42u3dQU7EMAwFUIv735lZIVBju5VQnSzeLBAw7Vt49ZU4Tny/+Qk6nU6n0+n0ET2yz+8T2e+XxyrhK9780Ol0Op1Op/+kjr+JJc0t67eXf1aCutPpdDqdTp/MM2nCWZ9cX2kEdafT6XQ6nX5Cnll3l6p9KHmGTqfT6XT6gXmm2U66vCvP0Ol0Op1OP7B/Ju0QXr/SP0On0+l0Ov2EPNOv2zz56XwTnU6n0+n0jXnm5kR3G376d9WdTqfT6XT68H5Temop3YdK35Jn6HQ6nU6n791vqibP9Lkl7a7RP0On0+l0On1vnnmybrNmm3QfSt3pdDqdTqfPn9dORwSnazjN8/IMnU6n0+n0Xeeb0hsN+if7qKPudDqdTqfT5/PMbbBJf3G+iU6n0+l0+vbz2k2Xb7OGk44LDvNn6HQ6nU6n75s/U13J1N/oFMUIPnmGTqfT6XT6fD9w3+sbdbdwOqZGnqHT6XQ6nT68PhNtS0zc9dikyzjqTqfT6XQ6fX4+cBRXG1TzgftZfOpOp9PpdDp94/1NTbtvNW1mfV7d6XQ6nU6nD6/PNBNm+qhTaepOp9PpdDp97/3azX5T2g8cy3EndafT6XQ6nT48T6/JOfHgru015Kg7nU6n0+n0+f2mJxdQphkm3XtSdzqdTqfT6fP3UcZdu28sO1DN6W91p9PpdDqdvjfPxIMGmzTVhP0mOp1Op9Ppx6zPNKs0zVkn6zN0Op1Op9MP6Z9JO2eiHbWnH5hOp9PpdPpR55uqP9OdpvSmJ3Wn0+l0Op2+d/7M/z90Op1Op9Pp7+sf4WcgX/nNavEAAAAASUVORK5CYII="/>
 
   <!-- short link -->
-  <rect x="162.0" y="985" width="470" height="58" rx="29" fill="#0b3c5d"/>
-  <text x="397.0" y="1024" text-anchor="middle" font-family="Courier New, monospace"
-        font-size="26" font-weight="bold" fill="#ffffff">hdbear.github.io/Chaminda</text>
+  <text x="397.0" y="858" text-anchor="middle" font-family="Courier New, monospace"
+        font-size="20" font-weight="bold" fill="#1d2b49">hdbear.github.io/Chaminda</text>
 
-  <!-- footer -->
-  <text x="397.0" y="1082" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
-        font-size="17" fill="#4c5a69">James Heal textile testing instruments — brochures &amp; flyers</text>
+  <!-- icon strip -->
+  <line x1="281" y1="894" x2="281" y2="972" stroke="#d4d7dc" stroke-width="1"/>
+  <line x1="513" y1="894" x2="513" y2="972" stroke="#d4d7dc" stroke-width="1"/>
+  <circle cx="166" cy="922" r="29" fill="#1d2b49"/>
+  <g transform="translate(152,908) scale(1.167)" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" color="#ffffff"><rect x="7.5" y="2.5" width="9" height="19" rx="2"/><path d="M10 7h1.8v1.8H10zM12.2 7H14v1.8h-1.8zM10 8.8h1.8v1.8H10zM12.2 8.8H14v1.8h-1.8z" fill="currentColor" stroke="none"/><path d="M9.8 12.5h4.4M9.8 15.5h4.4"/></g>
+  <text x="166" y="974" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="bold" fill="#1d2b49" letter-spacing="0.8">SCAN THE CODE</text>
+  <circle cx="397" cy="922" r="29" fill="#1d2b49"/>
+  <g transform="translate(383,908) scale(1.167)" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" color="#ffffff"><path d="M12 4v8.5m0 0l-3.2-3.2M12 12.5l3.2-3.2"/><path d="M5.5 15.5h4.5l1 1.8h2.8l1-1.8h3.7v4H5.5z"/></g>
+  <text x="397" y="974" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="bold" fill="#1d2b49" letter-spacing="0.8">BROWSE &amp; DOWNLOAD</text>
+  <circle cx="628" cy="922" r="29" fill="#1d2b49"/>
+  <g transform="translate(614,908) scale(1.167)" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" color="#ffffff"><circle cx="12" cy="9" r="4.2"/><path d="M10 12.5L8.5 20l3.5-2.2L15.5 20 14 12.5"/><path d="M10.6 9l1.1 1.1 2-2.1"/></g>
+  <text x="628" y="974" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12.5" font-weight="bold" fill="#1d2b49" letter-spacing="0.8">THANK YOU!</text>
+
+  <!-- footer band -->
+  <rect x="0" y="1036" width="794" height="87" fill="#1d2b49"/>
+  <text x="397.0" y="1068" text-anchor="middle" font-family="Georgia, serif"
+        font-size="17" font-style="italic" fill="#f4ede1">We value your time and interest.</text>
+  <text x="397.0" y="1102" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="24" font-weight="bold" fill="#e8442b" letter-spacing="1">THANK YOU FOR VISITING!</text>
+
+  <!-- outer border (drawn last, overlays band edges) -->
+  <rect x="11" y="11" width="772" height="1101" rx="22" fill="none" stroke="#e8442b" stroke-width="2.5"/>
 </svg>

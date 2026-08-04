@@ -13,10 +13,10 @@ app.js              search + category filter (progressive enhancement)
 catalogue.json      SOURCE OF TRUTH: site text, groups, documents, blurbs
 pdfs/               renamed, URL-safe copies of the source PDFs
 thumbs/             first-page cover thumbnails (WebP, 440px)
-assets/             favicon etc.
-qr/                 qr.svg, qr.png, poster-a4.svg/pdf/png
+assets/             favicon.svg, logo-jamesheal.png (extracted from the brochure cover)
+qr/                 qr.svg, qr.png, poster-a4.svg/png/pdf, handout-a6.svg/png/pdf
 tools/build.py      rebuilds pdfs/, thumbs/ and index.html from catalogue.json
-tools/make_qr.py    regenerates QR + A4 poster for the (possibly new) URL
+tools/make_qr.py    regenerates QR + A4 poster + A6 handout for the (possibly new) URL
 ```
 
 Source PDFs live one folder up (`../Brochures`, `../Flyers`) and are never
@@ -49,6 +49,9 @@ python3 tools/make_qr.py "https://NEW-URL/" "short-label-for-poster"
 ```
 
 Requires `pip install segno`. Then `git add qr && git commit && git push`.
+Branding: the poster/handout use the real James Heal logo extracted from the
+Performance Brochure (300 dpi). To use the exact vector CRB Techs logo instead
+of the drawn stand-in, drop the file in as `assets/crbtechs-logo.png` and re-run.
 
 ## Notes
 
