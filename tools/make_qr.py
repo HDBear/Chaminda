@@ -47,29 +47,16 @@ def qr_png_b64(border=1) -> str:
 
 
 QR_B64 = qr_png_b64()
-JH_LOGO = (SITE / "assets" / "logo-jamesheal.png").read_bytes()
-JH_B64 = base64.b64encode(JH_LOGO).decode()
+JH_B64 = base64.b64encode((SITE / "assets" / "logo-jamesheal.png").read_bytes())
+CRB_B64 = base64.b64encode((SITE / "assets" / "crbtechs-logo.png").read_bytes())
 
 
 def crb_logo(x, y, scale=1.0) -> str:
-    """CRB Techs stand-in mark, or embedded real logo if provided."""
-    custom = SITE / "assets" / "crbtechs-logo.png"
-    if custom.exists():
-        return (f'<image x="{x}" y="{y}" height="{104*scale}" '
-                f'xlink:href="data:image/png;base64,{b64(custom)}"/>')
-    s = scale
-    return f"""<g transform="translate({x},{y}) scale({s})">
-  <rect x="0" y="0" width="26" height="26" fill="{RED}"/>
-  <rect x="30" y="0" width="26" height="26" fill="{NAVY}"/>
-  <rect x="0" y="30" width="26" height="26" fill="{RED}"/>
-  <rect x="30" y="30" width="26" height="26" fill="{RED}"/>
-  <text x="68" y="46" font-family="Arial, Helvetica, sans-serif" font-size="52"
-        font-weight="bold" fill="{RED}" letter-spacing="1">CRB</text>
-  <text x="68" y="72" font-family="Arial, Helvetica, sans-serif" font-size="15.5"
-        font-weight="bold" fill="{NAVY}" letter-spacing="2.6">TECHS (PVT) LTD</text>
-  <text x="4" y="98" font-family="Georgia, serif" font-size="15" font-style="italic"
-        fill="#222">Trusted partner in your progress</text>
-</g>"""
+    """Embed the real CRB Techs logo PNG (1357x568 incl. tagline)."""
+    h = 104 * scale
+    w = h * (1357 / 568)
+    return (f'<image x="{x}" y="{y}" width="{w:.0f}" height="{h:.0f}" '
+            f'xlink:href="data:image/png;base64,{CRB_B64}"/>')
 
 
 ICONS = {
@@ -103,22 +90,16 @@ poster = f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.
   <defs>
     <pattern id="geo" width="46" height="46" patternUnits="userSpaceOnUse">
       <rect width="46" height="46" fill="{BG}"/>
-      <path d="M0 46L46 0M-11 11L11 -11M35 57L57 35" stroke="#eef0f3" stroke-width="1.4" fill="none"/>
+      <path d="M0 46L46 0M-11 11L11 -11M35 57L57 35" stroke="#f4f5f8" stroke-width="1.1" fill="none"/>
     </pattern>
   </defs>
 
   <rect width="{W}" height="{H}" fill="url(#geo)"/>
 
-  <!-- edge accents -->
-  <polygon points="0,540 44,584 44,648 0,604" fill="{NAVY}"/>
-  <polygon points="0,618 26,644 26,690 0,664" fill="{RED}"/>
-  <polygon points="{W},540 {W-44},584 {W-44},648 {W},604" fill="{NAVY}"/>
-  <polygon points="{W},618 {W-26},644 {W-26},690 {W},664" fill="{RED}"/>
-
   <!-- header: logos -->
-  <image x="52" y="52" width="301" height="52" xlink:href="data:image/png;base64,{JH_B64}"/>
+  <image x="88" y="54" width="265" height="47" xlink:href="data:image/png;base64,{JH_B64}"/>
   <line x1="397" y1="46" x2="397" y2="108" stroke="#d4d7dc" stroke-width="1.5"/>
-  {crb_logo(428, 40, 0.96)}
+  {crb_logo(486, 42, 0.68)}
 
   <!-- headline -->
   <text x="{W/2}" y="252" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
@@ -161,8 +142,8 @@ HW, HH = 559, 397
 handout = f"""<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
      width="{HW}" height="{HH}" viewBox="0 0 {HW} {HH}">
   <rect width="{HW}" height="{HH}" fill="{BG}"/>
-  <image x="34" y="34" width="188" height="33" xlink:href="data:image/png;base64,{JH_B64}"/>
-  {crb_logo(36, 92, 0.62)}
+  <image x="34" y="30" width="186" height="33" xlink:href="data:image/png;base64,{JH_B64}"/>
+  {crb_logo(36, 84, 0.85)}
   <text x="34" y="212" font-family="Arial, Helvetica, sans-serif" font-size="19"
         font-weight="bold" fill="{HEAD_NAVY}">Product Catalogue Library</text>
   <text x="34" y="238" font-family="Arial, Helvetica, sans-serif" font-size="12.5"
