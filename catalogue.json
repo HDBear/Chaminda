@@ -1,0 +1,199 @@
+{
+  "site": {
+    "company": "CRBTechs",
+    "partner": "James Heal",
+    "title": "Product Catalogue Library",
+    "intro": "Browse and download our James Heal testing instrument brochures and product flyers — scan, tap, download."
+  },
+  "groups": [
+    { "id": "featured", "title": "Featured & Brochures" },
+    { "id": "abrasion", "title": "Abrasion, Pilling & Snagging" },
+    { "id": "strength", "title": "Strength, Bursting & Tear" },
+    { "id": "colour",   "title": "Colour Fastness & Light" },
+    { "id": "washing",  "title": "Washing, Drying & Sustainability" },
+    { "id": "comfort",  "title": "Air, Water & Comfort" }
+  ],
+  "documents": [
+    {
+      "title": "Performance Testing Instruments Brochure",
+      "group": "featured", "type": "Brochure",
+      "source": "Brochures/James Heal Performance Testing Brochure.pdf",
+      "file": "performance-testing-brochure.pdf",
+      "compress": true,
+      "blurb": "The complete overview of the James Heal performance testing instrument range."
+    },
+    {
+      "title": "Test Materials Catalogue",
+      "group": "featured", "type": "Brochure", "tag": "2019 edition",
+      "source": "Brochures/James Heal Test Materials 2019 Brochure.pdf",
+      "file": "test-materials-catalogue-2019.pdf",
+      "blurb": "Consumables and test materials for textile testing laboratories."
+    },
+    {
+      "title": "Performance Range Overview",
+      "group": "featured", "type": "Flyer",
+      "source": "Flyers/James_Heal-Flyer-Performance_Range-20220525-Published.pdf",
+      "file": "performance-range-flyer.pdf",
+      "blurb": "The Performance testing range at a glance — instruments and applications."
+    },
+
+    {
+      "title": "Martindale",
+      "group": "abrasion", "type": "Flyer",
+      "source": "Flyers/James Heal Martindale_English.pdf",
+      "file": "martindale.pdf",
+      "blurb": "Industry-standard abrasion and pilling tester."
+    },
+    {
+      "title": "AquAbrasion",
+      "group": "abrasion", "type": "eBook",
+      "source": "Flyers/AquAbrasion eBook.pdf",
+      "file": "aquabrasion-ebook.pdf",
+      "blurb": "Wet abrasion testing for waterproof and outdoor performance fabrics."
+    },
+    {
+      "title": "ElastAbrasion",
+      "group": "abrasion", "type": "Flyer",
+      "source": "Flyers/ElastAbrasion_English.pdf",
+      "file": "elastabrasion.pdf",
+      "blurb": "Abrasion testing for stretch, elastane and athleisure fabrics."
+    },
+    {
+      "title": "Impulse",
+      "group": "abrasion", "type": "Flyer",
+      "source": "Flyers/James Heal Impulse_English.pdf",
+      "file": "impulse.pdf",
+      "blurb": "Random tumble pilling tester for fabric pilling and fuzzing assessment."
+    },
+    {
+      "title": "ProMace",
+      "group": "abrasion", "type": "Flyer",
+      "source": "Flyers/James Heal ProMace_Sept 2017_ English.pdf",
+      "file": "promace.pdf",
+      "blurb": "Mace snag tester for snagging resistance of knitted and woven fabrics."
+    },
+    {
+      "title": "FlexiFrame",
+      "group": "abrasion", "type": "Flyer",
+      "source": "Flyers/FlexiFrame Flyer.pdf",
+      "file": "flexiframe.pdf",
+      "blurb": "Flexible frame attachment for fabric snagging resistance testing."
+    },
+
+    {
+      "title": "TruBurst",
+      "group": "strength", "type": "Flyer",
+      "source": "Flyers/James Heal TruBurst_English.pdf",
+      "file": "truburst.pdf",
+      "blurb": "Pneumatic bursting strength and fatigue tester (ISO 13938)."
+    },
+    {
+      "title": "Titan",
+      "group": "strength", "type": "Flyer",
+      "source": "Flyers/James Heal Titan - English.pdf",
+      "file": "titan.pdf",
+      "blurb": "Universal strength tester — tensile, tear, seam and compression."
+    },
+    {
+      "title": "QuickTest",
+      "group": "strength", "type": "Flyer",
+      "source": "Flyers/QuickTest-Flyer.pdf",
+      "file": "quicktest.pdf",
+      "blurb": "Compact benchtop strength tester for routine QA."
+    },
+    {
+      "title": "ElmaTear",
+      "group": "strength", "type": "Flyer",
+      "source": "Flyers/James Heal ElmaTear_English.pdf",
+      "file": "elmatear.pdf",
+      "blurb": "Digital Elmendorf tear strength tester."
+    },
+
+    {
+      "title": "TruFade",
+      "group": "colour", "type": "Flyer",
+      "source": "Flyers/James Heal_TruFade_English.pdf",
+      "file": "trufade.pdf",
+      "blurb": "Xenon arc light fastness tester for colour fastness to light."
+    },
+    {
+      "title": "GyroWash",
+      "group": "colour", "type": "Flyer",
+      "source": "Flyers/James Heal GyroWash_English.pdf",
+      "file": "gyrowash.pdf",
+      "blurb": "Colour fastness to washing and dry cleaning tester."
+    },
+    {
+      "title": "Incubator Perspirometer",
+      "group": "colour", "type": "Flyer",
+      "source": "Flyers/James Heal Incubator Perspirometer - English.pdf",
+      "file": "perspirometer.pdf",
+      "blurb": "Combined incubator and perspirometer for perspiration fastness testing."
+    },
+    {
+      "title": "ProView",
+      "group": "colour", "type": "Flyer",
+      "source": "Flyers/James Heal ProView- English.pdf",
+      "file": "proview.pdf",
+      "blurb": "Colour assessment and viewing cabinet with standardised lighting."
+    },
+
+    {
+      "title": "DynaWash Duo",
+      "group": "washing", "type": "Flyer",
+      "source": "Flyers/James Heal DynaWash Duo_English.pdf",
+      "file": "dynawash-duo.pdf",
+      "blurb": "Garment and print durability tester — simulates multiple domestic washes."
+    },
+    {
+      "title": "DynaWash — Sustainability",
+      "group": "washing", "type": "Flyer",
+      "source": "Flyers/DynaWash - Sustainability Flyer.pdf",
+      "file": "dynawash-sustainability.pdf",
+      "blurb": "How DynaWash cuts water, energy and effluent in lab testing."
+    },
+    {
+      "title": "ProDry",
+      "group": "washing", "type": "Flyer",
+      "source": "Flyers/ProDry-Flyer.pdf",
+      "file": "prodry.pdf",
+      "blurb": "Drying rate tester — measures how quickly fabrics dry."
+    },
+    {
+      "title": "ThermaPlate",
+      "group": "washing", "type": "Flyer",
+      "source": "Flyers/James Heal ThermaPlate_English.pdf",
+      "file": "thermaplate.pdf",
+      "blurb": "Heated plate method drying rate testing (AATCC 201)."
+    },
+
+    {
+      "title": "AirPro",
+      "group": "comfort", "type": "Flyer",
+      "source": "Flyers/James Heal AIRPRO_A4_FLYER_V3.pdf",
+      "file": "airpro.pdf",
+      "blurb": "Air permeability tester for breathable and performance textiles."
+    },
+    {
+      "title": "HydroView",
+      "group": "comfort", "type": "Flyer",
+      "source": "Flyers/James Heal HYDROVIEW_A4_FLYER_V3.pdf",
+      "file": "hydroview.pdf",
+      "blurb": "Hydrostatic head tester for water penetration resistance."
+    },
+    {
+      "title": "TruRain",
+      "group": "comfort", "type": "Flyer",
+      "source": "Flyers/TruRain-Flyer.pdf",
+      "file": "trurain.pdf",
+      "blurb": "Bundesmann rain shower tester for water repellency."
+    },
+    {
+      "title": "WickView",
+      "group": "comfort", "type": "Flyer",
+      "source": "Flyers/WickView-Flye2r.pdf",
+      "file": "wickview.pdf",
+      "blurb": "Moisture wicking tester for sportswear and performance fabrics."
+    }
+  ]
+}
