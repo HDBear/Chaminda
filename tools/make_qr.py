@@ -47,8 +47,8 @@ def qr_png_b64(border=1) -> str:
 
 
 QR_B64 = qr_png_b64()
-JH_B64 = base64.b64encode((SITE / "assets" / "logo-jamesheal.png").read_bytes())
-CRB_B64 = base64.b64encode((SITE / "assets" / "crbtechs-logo.png").read_bytes())
+JH_B64 = base64.b64encode((SITE / "assets" / "logo-jamesheal.png").read_bytes()).decode()
+CRB_B64 = base64.b64encode((SITE / "assets" / "crbtechs-logo.png").read_bytes()).decode()
 
 
 def crb_logo(x, y, scale=1.0) -> str:
